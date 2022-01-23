@@ -1,0 +1,666 @@
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="deviceDetails.component.scss">
+    <link href='https://code.iconify.design/2/2.1.0/iconify.min.js' rel='stylesheet'>
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body onload="getId()">
+
+  <div class="sidebar">
+    <div class="logo-details">      
+      <span class="logo_name" ><pre style="color: white; margin-left: 20px; margin-right: 15px;">IOT DASHBOARD</pre></span>
+    </div>
+      <ul class="nav-links">
+        <li>
+            <a href="/home" >
+              <i class='bx bx-cloud-rain' ></i>
+              <span class="links_name">Home</span>
+            </a>
+        </li>
+        <li>
+          <a href="/deviceDetails" class="active">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>        
+
+        <li>
+            <a href="/registerdevice">
+              <i class='bx bx-cast' ></i>
+              <span class="links_name">Add Device</span>
+            </a>
+          </li>
+        
+        <li> 
+          <a href="/aboutus">
+            <i class='bx bx-heart' ></i>
+            <span class="links_name">About Us</span>
+          </a>
+        </li>
+        <li>
+          <a href="/account">
+            <i class='bx bx-cog' ></i>
+            <span class="links_name">Account</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="/login" (click)="logOut()">
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Dashboard</span>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <i class='bx bx-search' ></i>
+      </div>
+      <div class="profile-details">
+        <a href="/account" style="text-decoration: none;"></a>
+        <img src="./assets/images/user.png" alt="">
+        <span class="admin_name" >{{user.email}}</span>
+      </div>
+    </nav>
+
+    <div class="home-content">
+
+
+      <div class="overview-boxes">
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic" >Device Name</div>
+            <div class="number"  style="text-transform:uppercase">{{owlThing.name}}</div>
+            <div class="indicator">
+              <i class='bx bx-up-arrow-alt'></i>
+              <span class="text">upto yesterday </span>
+            </div>
+          </div>
+          <!-- <i class='bx bx-directions'></i> -->
+        </div>
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic">Device Type</div>
+            <div class="number" style="text-transform:uppercase" >{{subClassType.name}}</div>
+            <div class="indicator">
+              <i class='bx bx-bar-chart-square'></i>
+              <span class="text">Up from yesterday</span>
+            </div>
+          </div>
+          <i class='bx bx-bar-chart-square' ></i>
+        </div>
+      </div>
+
+      <div class="sales-boxes"  *ngIf="isIotLiteServiceShow() " >
+        <div class="recent-sales box">
+          <div class="title">IOT LITE SERVICE</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc" ><a>{{iotLiteService.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">INTERFACE DESCRIPTION</li>
+              <li class="topic-desc" ><a>{{iotLiteService.iotliteInterfaceDescription}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">ENDPOINT</li>
+              <li class="topic-desc" ><a>{{iotLiteService.iotliteendpoint}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">EXPOSED BY</li>
+              <li class="topic-desc" ><a>{{iotLiteService.iotliteexposedBy}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">INTERFACE TYPE</li>
+              <li class="topic-desc" ><a>{{iotLiteService.iotliteinterfaceType}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes" *ngIf="isIotLiteObjectShow()" >
+        <div class="recent-sales box">
+          <div class="title">IOT LITE OBJECT</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc" ><a>{{iotLiteObject.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE INTERFACE DESCRIPTION</li>
+              <li class="topic-desc"><a>{{iotLiteObject.iotliteInterfaceDescription}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+
+
+
+        <div class="top-sales box " *ngIf="isIotLiteObjectShow()">
+          <div class="title">ATTRIBUTE</div>
+          <ul class="top-sales-details" *ngFor="let attribute of iotLiteAttribute">
+            <li class="topic-desc" >
+              <!--<img src="images/sunglasses.jpg" alt="">-->
+              <span class="product">{{attribute.id}}</span>
+            <span class="price">{{attribute.description}}</span>
+          </li>
+        </ul>
+        </div>
+
+
+
+      </div>
+
+      <br>
+      <div class="sales-boxes" *ngIf="isSsnSystemShow()" >
+        <div class="recent-sales box">
+          <div class="title">SSN SYSTEM</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{ssnSystem.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">SSN SUBSYSTEM</li>
+              <li class="topic-desc"><a>{{ssnSystem.ssnSubSystem}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes" *ngIf="isGeoPointFromObjectShow() " >
+        <div class="recent-sales box">
+          <div class="title">GEO POINT</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{geoPointFromObject.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE RELATIVE LOCATION</li>
+              <li class="topic-desc"><a>{{geoPointFromObject.iotliteRelativeLocation}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT ALT RELATIVE </li>
+              <li class="topic-desc"><a>{{geoPointFromObject.iotliteAltRelative}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">LONG</li>
+              <li class="topic-desc"><a>{{geoPointFromObject.longg}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes" *ngIf="isSsnDeploymentFromGeoPointObjectShow() " >
+        <div class="recent-sales box">
+          <div class="title">SSN DEPLOYMENT</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{ssnDeploymentFromGeoPointObject.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">DESCRIPTION</li>
+              <li class="topic-desc"><a>{{ssnDeploymentFromGeoPointObject.description}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes" *ngIf="isIotLiteCoverageFromGeoPointObjectShow()" >
+        <div class="recent-sales box">
+          <div class="title">IOT LITE COVERAGE</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{iotLiteCoverageFromGeoPointObject.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE RECTANGLE</li>
+              <li class="topic-desc"><a>{{iotLiteCoverageFromGeoPointObject.iotliteRectangle}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE POLYGON</li>
+              <li class="topic-desc"><a>{{iotLiteCoverageFromGeoPointObject.iotlitePolygon}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+
+        <div class="top-sales box " *ngIf="isIotLiteCircleFromGeoPointObjectShow()">
+          <div class="title">IOT LITE CIRCLE</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{iotLiteCircleFromGeoPointObject.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE RADIUS</li>
+              <li class="topic-desc"><a>{{iotLiteCircleFromGeoPointObject.iotliteradiuse}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      
+      <div class="sales-boxes" *ngIf="isSsnDeviceShow()" >
+        <div class="recent-sales box">
+          <div class="title">SSN DEVICE</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{ssnDevice.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE ACTUATING DEVICE</li>
+              <li class="topic-desc"><a>{{ssnDevice.iotliteActuatingDevice}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE TAG DEVICE</li>
+              <li class="topic-desc"><a>{{ssnDevice.iotliteTagDevice}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes" *ngIf="isIotLiteCoverageFromSsnDeviceShow()" >
+        <div class="recent-sales box">
+          <div class="title">IOT LITE COVERAGE</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{iotLiteCoverageFromSsnDevice.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE RECTANGLE</li>
+              <li class="topic-desc"><a>{{iotLiteCoverageFromSsnDevice.iotliteRectangle}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE POLYGON</li>
+              <li class="topic-desc"><a>{{iotLiteCoverageFromSsnDevice.iotlitePolygon}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+
+        <div class="top-sales box " *ngIf="isIotLiteCircleFromSsnDeviceShow() ">
+          <div class="title">IOT LITE CIRCLE</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{iotLiteCircleFromSsnDevice.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE RADIUS</li>
+              <li class="topic-desc"><a>{{iotLiteCircleFromSsnDevice.iotliteradiuse}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes"  *ngIf="isIotLiteServiceFromSsnDeviceShow() " >
+        <div class="recent-sales box">
+          <div class="title">IOT LITE SERVICE</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{iotLiteServiceFromSsnDevice.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">INTERFACE DESCRIPTION</li>
+              <li class="topic-desc"><a>{{iotLiteServiceFromSsnDevice.iotliteInterfaceDescription}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">ENDPOINT</li>
+              <li class="topic-desc"><a>{{iotLiteServiceFromSsnDevice.iotliteendpoint}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">EXPOSED BY</li>
+              <li class="topic-desc"><a>{{iotLiteServiceFromSsnDevice.iotliteexposedBy}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">INTERFACE TYPE</li>
+              <li class="topic-desc"><a>{{iotLiteServiceFromSsnDevice.iotliteinterfaceType}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes"  *ngIf="isSsnDeplymentFromSsnDeviceShow() " >
+        <div class="recent-sales box">
+          <div class="title">SSN DEPLOYMENT</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{ssnDeploymentFromSsnDevice.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">DESCRIPTION</li>
+              <li class="topic-desc"><a>{{ssnDeploymentFromSsnDevice.description}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes" *ngIf="isSsnSensingDeviceIsShow()" >
+        <div class="recent-sales box">
+          <div class="title">SSN SENSING DEVICE</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{ssnSensingDeviceFromSsnDevice.id}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes" *ngIf="isSsnSensorIsShow()" >
+        <div class="recent-sales box">
+          <div class="title">SSN SENSOR</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{ssnSensorDeviceFromSsnDevice.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">QUANTITY KIND</li>
+              <li class="topic-desc"><a>{{ssnSensorDeviceFromSsnDevice.quQuantityKind}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">UNIT</li>
+              <li class="topic-desc"><a>{{ssnSensorDeviceFromSsnDevice.quUnit}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+
+        <div class="top-sales box "  *ngIf="isSsnDeploymentDeviceFromSsnDeviceSsnSensorShow()">
+          <div class="title">SSN DEPLOYMENT</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{ssnDeploymentDeviceFromSsnDeviceSsnSensor.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">DESCRIPTION</li>
+              <li class="topic-desc"><a>{{ssnDeploymentDeviceFromSsnDeviceSsnSensor.description}}</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="top-sales box " *ngIf="isIotLiteMetadataShow()">
+          <div class="title">IOT LITE METADATA</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{iotLiteMetadataSsnSensor.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">TYPE</li>
+              <li class="topic-desc"><a>{{iotLiteMetadataSsnSensor.iotliteMetadataType}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">VALUE</li>
+              <li class="topic-desc"><a>{{iotLiteMetadataSsnSensor.iotliteMetadataValue}}</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <br>
+
+      <div class="sales-boxes" *ngIf="isGeoPointFromCoverageShow() " >
+        <div class="recent-sales box">
+          <div class="title">GEO POINT</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{geoPointFromCoverage.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE RELATIVE LOCATION</li>
+              <li class="topic-desc"><a>{{geoPointFromCoverage.iotliteRelativeLocation}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT ALT RELATIVE </li>
+              <li class="topic-desc"><a>{{geoPointFromCoverage.iotliteAltRelative}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">LONG</li>
+              <li class="topic-desc"><a>{{geoPointFromCoverage.longg}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes" *ngIf="isSsnDeploymentFromGeoPointDeploymentShow() " >
+        <div class="recent-sales box">
+          <div class="title">SSN DEPLOYMENT</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{ssnDeploymentFromGeoPointDeployment.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">DESCRIPTION</li>
+              <li class="topic-desc"><a>{{ssnDeploymentFromGeoPointDeployment.description}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes" *ngIf="isIotLiteCoverageFromGeoPointCoverageShow()" >
+        <div class="recent-sales box">
+          <div class="title">IOT LITE COVERAGE</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{iotLiteCoverageFromGeoPointCoverage.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE RECTANGLE</li>
+              <li class="topic-desc"><a>{{iotLiteCoverageFromGeoPointCoverage.iotliteRectangle}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE POLYGON</li>
+              <li class="topic-desc"><a>{{iotLiteCoverageFromGeoPointCoverage.iotlitePolygon}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+
+        <div class="top-sales box " *ngIf="isIotLiteCircleFromGeoPointCoverageShow()">
+          <div class="title">IOT LITE CIRCLE</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{iotLiteCircleFromGeoPointCoverage.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE RADIUS</li>
+              <li class="topic-desc"><a>{{iotLiteCircleFromGeoPointCoverage.iotliteradiuse}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes" *ngIf="isGeoPointFromDeploymentShow() " >
+        <div class="recent-sales box">
+          <div class="title">GEO POINT FROM DEPLOYMENT</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{geoPointFromDeployment.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE RELATIVE LOCATION</li>
+              <li class="topic-desc"><a>{{geoPointFromDeployment.iotliteRelativeLocation}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT ALT RELATIVE </li>
+              <li class="topic-desc"><a>{{geoPointFromDeployment.iotliteAltRelative}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">LONG</li>
+              <li class="topic-desc"><a>{{geoPointFromDeployment.longg}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes" *ngIf="isSsnDeploymentFromGeoPointCoverageShow() " >
+        <div class="recent-sales box">
+          <div class="title">SSN DEPLOYMENT</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{ssnDeploymentFromGeoPointCoverage.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">DESCRIPTION</li>
+              <li class="topic-desc"><a>{{ssnDeploymentFromGeoPointCoverage.description}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="sales-boxes" *ngIf="isIotLiteCoverageFromGeoPointDeploymentShow()" >
+        <div class="recent-sales box">
+          <div class="title">IOT LITE COVERAGE</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{iotLiteCoverageFromGeoPointDeployment.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE RECTANGLE</li>
+              <li class="topic-desc"><a>{{iotLiteCoverageFromGeoPointDeployment.iotliteRectangle}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE POLYGON</li>
+              <li class="topic-desc"><a>{{iotLiteCoverageFromGeoPointDeployment.iotlitePolygon}}</a></li>
+            </ul>
+          </div>
+          <div class="button">
+            <a href="#">See All</a>
+          </div>
+        </div>
+
+        <div class="top-sales box " *ngIf="isIotLiteCircleFromGeoPointDeploymentShow()">
+          <div class="title">IOT LITE CIRCLE</div>
+          <div class="sales-details">
+            <ul class="details">
+              <li class="topic">ID</li>
+              <li class="topic-desc"><a>{{iotLiteCircleFromGeoPointDeployment.id}}</a></li>
+            </ul>
+            <ul class="details">
+              <li class="topic">IOT LITE RADIUS</li>
+              <li class="topic-desc"><a>{{iotLiteCircleFromGeoPointDeployment.iotliteradiuse}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+
+    </div>
+
+
+
+  
+  </section>
+
+
+
+</body>
+</html>
+

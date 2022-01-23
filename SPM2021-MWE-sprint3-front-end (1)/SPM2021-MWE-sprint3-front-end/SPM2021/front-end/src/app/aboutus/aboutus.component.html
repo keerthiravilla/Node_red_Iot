@@ -1,0 +1,134 @@
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="aboutus.component.scss">
+    <link href='https://code.iconify.design/2/2.1.0/iconify.min.js' rel='stylesheet'>
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">      
+      <span class="logo_name" ><pre style="color: white; margin-left: 20px; margin-right: 15px;">IOT DASHBOARD</pre></span>
+    </div>
+      <ul class="nav-links">
+        <li>
+            <a href="/home" >
+              <i class='bx bx-cloud-rain' ></i>
+              <span class="links_name">Home</span>
+            </a>
+        </li>
+        <li>
+            <a href="/registerdevice">
+              <i class='bx bx-cast' ></i>
+              <span class="links_name">Add Device</span>
+            </a>
+          </li>
+
+        <li> 
+          <a href="/aboutus" class="active">
+            <i class='bx bx-heart' ></i>
+            <span class="links_name">About Us</span>
+          </a>
+        </li>
+        <li>
+          <a href="/account">
+            <i class='bx bx-cog' ></i>
+            <span class="links_name">Account</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="/login" (click)="logOut()">
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">About Us</span>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <i class='bx bx-search' ></i>
+      </div>
+      <div class="profile-details">
+        <a href="/account" style="text-decoration: none;"></a>
+        <img src="./assets/images/user.png" alt="">
+        <span class="admin_name" >{{user.email}}</span>
+      </div>
+    </nav>
+
+    <br>
+    <br>
+    <div class="about-section">
+      <h1>About Us</h1>
+      <h4><p>Hey!! Thanks for your interest in knowing us.
+         We are students of unicam, trying to build a better world with our innovations and capabilites. 
+         We make managing and acessing the iot devices simpler, just by registering them with us, you will be able to
+        have clear picture of the device data. Get to know us better by contacting us...
+      </p></h4>
+    
+  
+    </div>
+    
+    <h2 style="text-align:center;">Our Team</h2>
+    <div class="row" style="align-content: center;">
+      <div class="column" style="align-content: center;">
+        <div class="card">
+          <img src="./assets/images/anime6.png" alt="keerthi" style="width: 200px;  height: 200px;  margin-top: 20px;  align-self: center; border-radius: 50%;" alt="Avatar">
+          <div class="container">
+            <h2>Keerthi Ravilla</h2>
+            <p>Master's of computer science</p>
+            <p>University of Camerino</p>
+            <p>Keerthi34.rs@gmail.com</p>
+            <br>
+            <p><button class="button">Contact</button></p>
+          </div>
+        </div>
+      </div>
+    
+      <div class="column">
+        <div class="card">
+          <img src="./assets/images/anime3.png" alt="gioele" style="width: 200px; height: 200px; margin-top: 20px;  align-self: center; border-radius: 50%;" alt="Avatar" >
+          <div class="container">
+            <h2>Gioele</h2>
+            <p>Master's of computer science</p>
+            <p>University of Camerino</p>
+            <p>gioele.giache@studenti.unicam.it</p>
+            <br>
+            <p><button class="button">Contact</button></p>
+          </div>
+        </div>
+      </div>
+    
+      <div class="column">
+        <div class="card">
+          <img src="./assets/images/anime3.png" alt="lorenzo" style="width: 200px; height: 200px; margin-top: 20px; align-self: center; border-radius: 50%;" alt="Avatar">
+          <div class="container">
+            <h2>Lorenzo</h2>
+            <p>Master's of computer science</p>
+            <p>University of Camerino</p>
+            <p>lorenzo.brancaleoni@studenti.unicam.it</p>
+            <p><button class="button">Contact</button></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+  </section>
+
+</body>
+</html>
+
+
+
+
+

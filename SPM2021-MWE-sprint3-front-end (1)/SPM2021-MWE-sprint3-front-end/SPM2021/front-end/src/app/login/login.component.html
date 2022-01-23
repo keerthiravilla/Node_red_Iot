@@ -1,0 +1,48 @@
+<body>    
+    <div class="container" style=" height: 780px;">
+        <div class="row" >
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <h5 class="card-title text-center"><b>Welcome, login if you are register</b></h5>
+
+                        <form class="form-signin">
+                            <div class="form-group">
+                                    <p>Email</p>
+                                <input type="email" name="email" [(ngModel)]="email" id="inputemail" class="form-control" placeholder="Email address" (keyup)="existUser()"
+                                    required autofocus>
+                                
+                                <label for="inputemail"></label>
+                            </div>
+                            <div class="form-group">
+                                <p >Password</p>
+                                <input type="password" name="password" [(ngModel)]="password" id="inputPassword" class="form-control" placeholder="Password"
+                                    required>
+                                <label for="inputPassword"></label>
+                            </div>
+                            <div *ngIf="invalidLogin" class="alert alert-danger">
+                                <div *ngIf="invalidLogin">
+                                    Incorrect credentials
+                                </div>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" (click)=checkLogin() type="submit">Login</button>
+
+                            <hr class="my-4">
+                            
+                            
+                        </form>
+
+                        <form class="form-signin">
+                            <button routerLink="/registration" class="btn btn-lg btn-google btn-block text-uppercase"><i class="fab fa-google mr-2"></i>Sign up</button>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

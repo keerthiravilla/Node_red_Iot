@@ -1,0 +1,97 @@
+<html>
+</html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="UTF-8">
+      <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+      <link rel="stylesheet" href="deviceobject.component.scss">
+      <link href='https://code.iconify.design/2/2.1.0/iconify.min.js' rel='stylesheet'>
+      <!-- Boxicons CDN Link -->
+      <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <body>
+      <div class="sidebar">
+         <div class="logo-details">
+            <span class="logo_name" >
+               <pre style="color: white; margin-left: 20px; margin-right: 15px;">IOT DASHBOARD</pre>
+            </span>
+         </div>
+         <ul class="nav-links">
+            <li>
+               <a href="/home" >
+               <i class='bx bx-cloud-rain' ></i>
+               <span class="links_name">Home</span>
+               </a>
+            </li>
+            <li>
+               <a href="/registerdevice" class="active">
+               <i class='bx bx-cast' ></i>
+               <span class="links_name">Add Device</span>
+               </a>
+            </li>
+            <li> 
+               <a href="/aboutus">
+               <i class='bx bx-heart' ></i>
+               <span class="links_name">About Us</span>
+               </a>
+            </li>
+            <li>
+               <a href="/account">
+               <i class='bx bx-cog' ></i>
+               <span class="links_name">Account</span>
+               </a>
+            </li>
+            <li class="log_out">
+               <a href="/login" (click)="logOut()">
+               <i class='bx bx-log-out'></i>
+               <span class="links_name">Log out</span>
+               </a>
+            </li>
+         </ul>
+      </div>
+      <section class="home-section">
+         <nav>
+            <div class="sidebar-button">
+               <i class='bx bx-menu sidebarBtn'></i>
+               <span class="dashboard">Your Devices</span>
+            </div>
+            <div class="search-box">
+               <input type="text" placeholder="Search...">
+               <i class='bx bx-search' ></i>
+            </div>
+            <div class="profile-details" >
+               <a href="/account" style="text-decoration: none;">
+                  <!--<img src="images/profile.jpg" alt="">-->
+                  <img src="./assets/images/user.png" alt="">
+                  <span class="admin_name">{{user.email}}</span>
+               </a>
+            </div>
+         </nav>
+         <div class="container" style=" height: 880px;">
+            <div class="row" >
+               <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                  <div class="card card-signin my-5">
+                     <div class="card-body">
+                        <h5 class="card-title text-center" style="font-weight: bolder;"><b>Object form</b></h5>
+                        <form (ngSubmit)="onSubmit()" #userForm="ngForm" style="text-align: -webkit-center; ">
+                        <div class="form-group">
+                           <label for="id" style="font-weight: bolder;">object ID*</label>
+                           <input type="text" [(ngModel)]="iotLiteObject.id" required minlength="2" class="form-control" id="id" name="id"
+                           placeholder="Enter your registry id" required #email="ngModel" (keyup)="existUser()">
+                        </div>
+                        <div class="form-group">
+                           <label for="name"style="font-weight: bolder;">Device Name*</label>
+                           <input type="text" [(ngModel)]=" iotLiteObject.iotliteInterfaceDescription" required minlength="2" class="form-control" id="devicename" name="devicename"
+                           placeholder="Enter  iotliteInterfaceDescription" required #name="ngModel">
+                        </div>                                      
+                        <a href="registerdevice/attribute" type= "submit" class="btn btn-lg btn-google btn-block text-uppercase" (click)="isCollapsed = !isCollapsed"><i class="fab fa-google mr-2"></i>Next</a> 
+                      </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </body>
+</html>

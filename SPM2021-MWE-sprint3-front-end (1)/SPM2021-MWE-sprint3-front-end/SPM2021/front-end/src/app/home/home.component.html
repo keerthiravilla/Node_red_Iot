@@ -1,0 +1,120 @@
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+    <link rel="stylesheet" href="home.component.scss">
+    <link href='https://code.iconify.design/2/2.1.0/iconify.min.js' rel='stylesheet'>
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">      
+      <span class="logo_name" ><pre style="color: white; margin-left: 20px; margin-right: 15px;">IOT DASHBOARD</pre></span>
+    </div>
+      <ul class="nav-links">
+        <li>
+            <a href="/home" class="active">
+              <i class='bx bx-cloud-rain' ></i>
+              <span class="links_name">Home</span>
+            </a>
+        </li>
+ 
+        <!-- <li>
+          <a href="#">
+            <i class='bx bx-list-ul' ></i>
+            <span class="links_name">About us</span>
+          </a>
+        </li> -->
+        <li>
+            <a href="/registerdevice">
+              <i class='bx bx-cast' ></i>
+              <span class="links_name">Add Device</span>
+            </a>
+          </li>
+        <!-- <li>
+          <a href="#">
+            <i class='bx bx-pie-chart-alt-2' ></i>
+            <span class="links_name">Analytics</span>
+          </a>
+        </li>
+       
+        <li>
+          <a href="#">
+            <i class='bx bx-bar-chart-alt' ></i>
+            <span class="links_name">Logs & Graphs</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-message' ></i>
+            <span class="links_name">Messages</span>
+          </a>
+        </li>
+        -->
+        <li> 
+          <a href="/aboutus">
+            <i class='bx bx-heart' ></i>
+            <span class="links_name">About Us</span>
+          </a>
+        </li>
+        <li>
+          <a href="/account">
+            <i class='bx bx-cog' ></i>
+            <span class="links_name">Account</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="/login" (click)="logOut()">
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+  <section class="home-section">
+  
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Your Devices</span>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <i class='bx bx-search' ></i>
+      </div>
+      <div class="profile-details" >
+        <a href="/account" style="text-decoration: none;">
+        <!--<img src="images/profile.jpg" alt="">-->
+        <img src="./assets/images/user.png" alt="">
+
+        <span class="admin_name">{{user.email}}</span>
+      </a>
+      </div>
+    </nav>
+
+    <div class="row">
+      <div *ngFor="let Device of devices" class="col-2">
+          <div class="card" >
+            <img class="card-img-top" [src]="getImage(Device)"  style="margin-top: 20px;">
+            <br>
+            <hr class="my-1" style="width: 200px; align-self: center;">
+
+            <div class="card-body">
+              <h5 class="card-title" style="text-transform:uppercase">{{Device.name}}</h5>
+              <p class="card-text" style="text-transform:lowercase">{{Device.subClassType.name}}</p>
+                <a class="btn btn-primary" style="color: white;" (click)="goToDetails(Device.id)">SEE MORE</a>
+            </div>
+          </div>
+      </div>
+    </div>
+
+
+
+  </section>
+
+</body>
+</html>
+

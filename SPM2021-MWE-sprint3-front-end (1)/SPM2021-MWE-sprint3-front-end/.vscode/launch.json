@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "com.SPMProject.backend.Main",
+            "projectName": "back-end"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MweApplication<mwe>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.spm2021.mwe.MweApplication",
+            "projectName": "mwe",
+            "args": ""
+        }
+    ]
+}
